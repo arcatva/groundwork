@@ -120,6 +120,28 @@ func TestReviewersCannotChangeTheSharedPython(t *testing.T) {
 	}
 }
 
+func TestReadOnlyTakesTheWriteBitsOff(t *testing.T) {
+	dir := t.TempDir()
+	file := filepath.Join(dir, "lib", "site.py")
+	if err := os.MkdirAll(filepath.Dir(file), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(file, []byte("x"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := ReadOnly(dir); err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() {
+		for _, p := range []string{dir, filepath.Dir(file)} {
+			_ = os.Chmod(p, 0o755)
+		}
+	})
+	if err := os.WriteFile(file, []byte("y"), 0o644); err == nil {
+		t.Error("a file in the read-only tree was written")
+	}
+}
+
 func TestUnpackRefusesAPathOutOfTheTree(t *testing.T) {
 	dir := t.TempDir()
 	tarball := filepath.Join(dir, "x.tgz")

@@ -111,6 +111,9 @@ func RunAll(layout paths.Layout, prs, only []string, budget float64, runs int) (
 		return dir, err
 	}
 	defer lock.Release()
+	if err := ReadOnly(layout.Venv); err != nil {
+		return dir, err
+	}
 	shared := sandbox.NewSharedTemp(layout.Archive)
 	for k := 1; k <= runs; k++ {
 		for _, number := range prs {

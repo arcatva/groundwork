@@ -225,6 +225,21 @@ func throughLink(dest, rel string) bool {
 	return false
 }
 
+// ReadOnly takes the write bits off every file and folder under dir. Every run uses the one Python
+// environment, through a link in its work tree; read-only on disk, no path to it can change it.
+func ReadOnly(dir string) error {
+	return filepath.WalkDir(dir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil || d.Type()&fs.ModeSymlink != 0 {
+			return err
+		}
+		info, err := d.Info()
+		if err != nil {
+			return err
+		}
+		return os.Chmod(path, info.Mode().Perm()&^0o222)
+	})
+}
+
 const bodyEdits = `query($owner: String!, $name: String!, $n: Int!) {
   repository(owner: $owner, name: $name) { pullRequest(number: $n) {
     userContentEdits(first: 50) { nodes { editedAt diff } } } } }`
@@ -298,6 +313,9 @@ func Prepare(layout paths.Layout, repo string, numbers []int) error {
 		if err := exec.Command(filepath.Join(layout.Venv, "bin", "pip"), "install", "-q", "asgiref", "sqlparse").Run(); err != nil {
 			return err
 		}
+	}
+	if err := ReadOnly(layout.Venv); err != nil {
+		return err
 	}
 	for _, s := range All {
 		dest := filepath.Join(layout.Rivals, s.Name)

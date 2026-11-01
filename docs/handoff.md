@@ -19,9 +19,9 @@ principles over case lists.
    11/11; without: ambiguous-feature 1/9, review-scope 4/4, small-bug 5/9). The rest were either
    "did not finish" although the run's result said success, or ungraded because the grader's reply
    held no JSON. The Python harness never showed either over hundreds of runs, so the cause is in
-   the Go runner (`internal/agent`, `internal/judge`). Both errors now record the exit code, the end
-   of stderr and the end of the grader's reply: rerun `groundwork eval --only small-bug` and read
-   the record.
+   the Go runner (`internal/agent`, `internal/judge`). It is intermittent: a rerun of small-bug on
+   2026-11-01 finished and scored 9/9. Both errors now record the exit code, the end of stderr and
+   the end of the grader's reply, so the next one explains itself in its record.
 2. **Round 8 needs its eval** once item 1 is fixed: `groundwork eval`, then `--baseline`.
 3. **The comparison with other review skills has no result yet.** 18 of 50 reviews (5 suites x 5
    held-out Django PRs x 2 runs) ran on the Python harness before the run was stopped; they are not
