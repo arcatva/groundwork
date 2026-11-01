@@ -11,6 +11,7 @@ import (
 
 	"github.com/arcatva/groundwork/internal/agent"
 	"github.com/arcatva/groundwork/internal/paths"
+	"github.com/arcatva/groundwork/internal/sandbox"
 	"github.com/arcatva/groundwork/internal/text"
 )
 
@@ -104,6 +105,18 @@ func TestUnpackDropsAgentSettingsAndKeepsInstructions(t *testing.T) {
 	}
 	if b, _ := os.ReadFile(filepath.Join(dest, "AGENTS.md")); string(b) != "rules" {
 		t.Error("the repo's instruction file was not kept")
+	}
+}
+
+func TestReviewersCannotChangeTheSharedPython(t *testing.T) {
+	layout := paths.At(t.TempDir())
+	s := RunSettings(layout, sandbox.SharedTemp{Root: t.TempDir()}, nil)
+	fs := s["sandbox"].(map[string]any)["filesystem"].(map[string]any)
+	if !slices.Contains(fs["denyWrite"].([]string), layout.Venv) {
+		t.Error("the shared Python environment is writable")
+	}
+	if !slices.Contains(s["permissions"].(map[string]any)["deny"].([]string), "Write(/"+layout.Venv+"/**)") {
+		t.Error("the Write tool may change the shared Python environment")
 	}
 }
 

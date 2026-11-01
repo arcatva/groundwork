@@ -10,7 +10,8 @@ public pull requests. The harness is `groundwork compare` (see CONTRIBUTING.md);
 at the commit the first human review saw, so every reviewer sees what the humans saw. The repo is
 rebuilt as two branches, `base` and `pr`, with their real commit messages and no other history, so
 the commits that answered the review cannot leak in. The PR description is restored to its text at
-the time of that first review.
+the time of that first review. A symlink whose target has a `..` step is left out of the tree (in
+Django, four documentation icons), and the shared Python environment is read-only to every run.
 
 **Held-out.** groundwork was tuned on one PR (#22154). The table reports it apart, as "dev"; the
 held-out PRs were chosen before their human review was read, and no rule was changed after it.

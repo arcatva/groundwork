@@ -26,7 +26,20 @@ func Hidden(layout paths.Layout) []string {
 // RunSettings is a reviewer's sandbox: Hidden, and whatever was in the shared temp folder when the run
 // started, unreadable.
 func RunSettings(layout paths.Layout, shared sandbox.SharedTemp, existing map[string]bool) map[string]any {
-	return sandbox.Settings(append(Hidden(layout), shared.Stale(existing)...))
+	s := sandbox.Settings(append(Hidden(layout), shared.Stale(existing)...))
+	// Every run uses the one Python environment: none may change it for the runs after.
+	venv := []string{layout.Venv}
+	if real, err := filepath.EvalSymlinks(layout.Venv); err == nil && real != layout.Venv {
+		venv = append(venv, real)
+	}
+	s["sandbox"].(map[string]any)["filesystem"].(map[string]any)["denyWrite"] = venv
+	perms := s["permissions"].(map[string]any)
+	deny := perms["deny"].([]string)
+	for _, v := range venv {
+		deny = append(deny, "Edit(/"+v+"/**)", "Write(/"+v+"/**)")
+	}
+	perms["deny"] = deny
+	return s
 }
 
 var codeSpans = regexp.MustCompile("(?s)```.*?```|`[^`]*`")

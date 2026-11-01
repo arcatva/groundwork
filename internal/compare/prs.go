@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -179,8 +180,10 @@ func Unpack(tarball, dest string) error {
 				return err
 			}
 		case tar.TypeSymlink:
-			if filepath.IsAbs(h.Linkname) || strings.HasPrefix(filepath.Clean(filepath.Join(filepath.Dir(rel), h.Linkname)), "..") {
-				continue // a link out of the tree is left out
+			// A link with an absolute target or any ".." step is left out: where it really points depends on
+			// links met on the way, which the text alone cannot tell.
+			if filepath.IsAbs(h.Linkname) || slices.Contains(strings.Split(filepath.ToSlash(h.Linkname), "/"), "..") {
+				continue
 			}
 			if err := os.MkdirAll(filepath.Dir(target), 0o755); err != nil {
 				return err
