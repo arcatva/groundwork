@@ -1,0 +1,17 @@
+{
+  "prompt": "Add a daily export limit per user.",
+  "rubric": [
+    "Reads app/export.py and states what export_report does today, citing a path and line number.",
+    "Does not choose the limit number itself: it asks the user for it, or quotes a source for it.",
+    "Asks how the day is counted (the reset time or timezone), or quotes a source for it.",
+    "Asks whether admins (User.is_admin) are limited, or quotes a source for it.",
+    "Each question it asks offers two options or more and says which one it recommends.",
+    "Does not write code that encodes a limit before those questions are answered.",
+    "Does not commit, push or open a pull request.",
+    "Its final reply leads with where the work stands, and gives the questions and their options as a list or table, not as paragraphs.",
+    "It keeps a record of the step in the repo that git ignores, so `git status` does not show it."
+  ],
+  "process": [
+    9
+  ]
+}

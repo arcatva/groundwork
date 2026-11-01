@@ -1,0 +1,7 @@
+__pycache__/
+.DS_Store
+.neutral-words
+evals/results/
+evals/compare-data/
+/groundwork
+/dist/

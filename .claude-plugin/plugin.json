@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "groundwork",
+  "displayName": "Groundwork",
+  "version": "0.4.0",
+  "description": "From request to reviewed PR: frame, plan, build against a defect-type standard, review with three parallel reviewers, ship, learn. Every claim tied to evidence, every product decision tied to its source.",
+  "author": {
+    "name": "Zhefu Zhang",
+    "email": "a723356@gmail.com"
+  },
+  "homepage": "https://github.com/arcatva/groundwork",
+  "repository": "https://github.com/arcatva/groundwork",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "requirements",
+    "planning",
+    "code-review",
+    "tdd",
+    "pull-request"
+  ]
+}

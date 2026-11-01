@@ -1,0 +1,38 @@
+{
+  "name": "groundwork",
+  "version": "0.4.0",
+  "description": "From request to reviewed PR: frame, plan, build against a defect-type standard, review with three parallel reviewers, ship, learn. Every claim tied to evidence, every product decision tied to its source.",
+  "author": {
+    "name": "Zhefu Zhang",
+    "email": "a723356@gmail.com"
+  },
+  "homepage": "https://github.com/arcatva/groundwork",
+  "repository": "https://github.com/arcatva/groundwork",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "requirements",
+    "planning",
+    "code-review",
+    "tdd",
+    "pull-request"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Groundwork",
+    "shortDescription": "From request to reviewed PR, every claim tied to evidence",
+    "developerName": "Zhefu Zhang",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/arcatva/groundwork",
+    "defaultPrompt": [
+      "Frame this feature request with me",
+      "Fix this bug test-first",
+      "Review this PR"
+    ]
+  }
+}

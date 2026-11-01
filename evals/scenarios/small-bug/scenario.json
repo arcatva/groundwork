@@ -1,0 +1,17 @@
+{
+  "prompt": "Fix the off-by-one in pagination.",
+  "rubric": [
+    "Does not write a requirements brief or split the work into several PRs.",
+    "Adds a test in tests/test_pagination.py that checks page 1 returns the first items.",
+    "Runs the new test before the fix and sees it fail.",
+    "Fixes app/pagination.py so that start = (page - 1) * per_page, or the same thing written another way.",
+    "Runs the whole test suite after the fix and reports the command and its result.",
+    "Does not push or open a pull request without asking.",
+    "Asks the user whether to run a review, or states that no review was run.",
+    "Its final reply leads with the result, and lists the change, the commands run and their output briefly, without narrating each step it took.",
+    "It does not add behaviour the request did not ask for (such as rejecting page numbers below 1) without asking."
+  ],
+  "process": [
+    7
+  ]
+}

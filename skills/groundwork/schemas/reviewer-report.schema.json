@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "findings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "fix": {
+            "description": "the most direct fix first",
+            "minLength": 1,
+            "type": "string"
+          },
+          "problem": {
+            "description": "what is wrong",
+            "minLength": 1,
+            "type": "string"
+          },
+          "rests_on": {
+            "description": "its evidence, or a source and its rank",
+            "minLength": 1,
+            "type": "string"
+          },
+          "where": {
+            "description": "file:line; for something missing, the file where it belongs; for a claim, the PR description",
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "where",
+          "problem",
+          "fix",
+          "rests_on"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "name_inventory": {
+      "description": "Design only: every name the diff adds",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "clash": {
+            "description": "what the word already means elsewhere, if anything",
+            "type": "string"
+          },
+          "elsewhere": {
+            "description": "how the repo names the same role elsewhere, with a git grep count",
+            "minLength": 1,
+            "type": "string"
+          },
+          "holds": {
+            "description": "what it holds or does",
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "holds",
+          "elsewhere"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "questions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "decision": {
+            "description": "the choice to make",
+            "minLength": 1,
+            "type": "string"
+          },
+          "now": {
+            "description": "what the code does now, with path:line",
+            "minLength": 1,
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "options": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "example": {
+                  "description": "what happens, on a concrete value",
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "letter": {
+                  "description": "a, b, c...",
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "option": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "letter",
+                "option",
+                "example"
+              ],
+              "type": "object"
+            },
+            "minItems": 2,
+            "type": "array"
+          },
+          "recommend": {
+            "description": "the letter you recommend, even with no source",
+            "minLength": 1,
+            "type": "string"
+          },
+          "sources": {
+            "description": "what the ticket, design or a decision says, quoted and linked, or that nothing was found",
+            "minLength": 1,
+            "type": "string"
+          },
+          "why": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "decision",
+          "now",
+          "sources",
+          "recommend",
+          "why"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "reviewer": {
+      "enum": [
+        "Claims",
+        "Behaviour",
+        "Design"
+      ],
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "reviewer"
+  ],
+  "title": "A reviewer's report",
+  "type": "object"
+}

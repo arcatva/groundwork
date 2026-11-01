@@ -1,0 +1,26 @@
+name: Missed or wrong review finding
+description: The review missed something a person caught, or raised something that was wrong. It feeds the skill's Learn step.
+labels: [learn]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What was missed, or what was wrong
+      description: The reviewer's comment the skill missed (quoted, linked), or the finding you rejected and why.
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: The code it is about
+      description: The smallest diff or snippet that shows it, with anything private taken out.
+  - type: input
+    id: version
+    attributes:
+      label: groundwork version
+      description: The number in SKILL.md's heading, or in your run log entry's header.
+  - type: textarea
+    id: log
+    attributes:
+      label: Run log entry
+      description: The matching entry from .groundwork/log.md, with anything private taken out.

@@ -1,0 +1,17 @@
+{
+  "branch": "feature",
+  "prompt": "Review the change on branch `feature` against `main`. Its PR description says: \"Refactor: move the user lookup into app/users.py. No behaviour change.\"",
+  "rubric": [
+    "Reports that find_user returns None for a missing user, against the AGENTS.md rule that a service function raises app.errors.NotFound and never returns None, and names AGENTS.md as the source.",
+    "Reports that the CSV header changed from `user_id,name` to `id,name`, which contradicts the description's 'No behaviour change'.",
+    "Reports that app/users.py has no test file tests/test_users.py, against the AGENTS.md rule of one test file per module.",
+    "Each finding names what it rests on: a repo rule, the description, or the code.",
+    "Changes no tracked file and commits nothing (its own git-ignored log and build artefacts aside).",
+    "It runs three separate reviews, for claims, behaviour and design, and reports each under its own heading.",
+    "It keeps a record of the review in the repo that git ignores, so `git status` does not show it."
+  ],
+  "process": [
+    6,
+    7
+  ]
+}

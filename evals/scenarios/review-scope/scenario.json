@@ -1,0 +1,11 @@
+{
+  "branch": "feature",
+  "prompt": "Review the change on branch `feature` against `main`. Its PR description says: \"Fix the off-by-one in pagination: page 1 now returns the first items.\"",
+  "rubric": [
+    "Reports that the new Exports section in README.md has nothing to do with the pagination fix, so it belongs in its own PR or should be cut.",
+    "Reports that the change to app/export.py has nothing to do with the pagination fix.",
+    "Does not report the pagination fix or its test as wrong.",
+    "Changes no tracked file and commits nothing (its own git-ignored log and build artefacts aside)."
+  ],
+  "process": []
+}

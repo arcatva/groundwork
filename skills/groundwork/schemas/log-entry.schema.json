@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "answers": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "quoted": {
+            "description": "the user's own words",
+            "minLength": 1,
+            "type": "string"
+          },
+          "to": {
+            "description": "the question or proposal it answers",
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "to",
+          "quoted"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "branch": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "commit": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "corrections": {
+      "description": "a step skipped, a gate passed without its output, a contract broken",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "gate": {
+      "description": "the gate's output",
+      "type": "string"
+    },
+    "groundwork_version": {
+      "description": "the number in SKILL.md's heading",
+      "minLength": 1,
+      "type": "string"
+    },
+    "report": {
+      "description": "the report the user saw",
+      "minLength": 1,
+      "type": "string"
+    },
+    "skipped": {
+      "description": "steps the flow went past, each with the user's word for it",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "because": {
+            "description": "the user's words, quoted",
+            "minLength": 1,
+            "type": "string"
+          },
+          "step": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "step",
+          "because"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "done",
+        "needs you",
+        "blocked"
+      ],
+      "minLength": 1,
+      "type": "string"
+    },
+    "step": {
+      "enum": [
+        "Frame",
+        "Plan",
+        "Build",
+        "Review",
+        "Ship",
+        "Learn"
+      ],
+      "minLength": 1,
+      "type": "string"
+    },
+    "time": {
+      "description": "RFC 3339",
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "time",
+    "branch",
+    "commit",
+    "groundwork_version",
+    "step",
+    "status",
+    "report"
+  ],
+  "title": "One entry of the run log, .groundwork/log.jsonl",
+  "type": "object"
+}

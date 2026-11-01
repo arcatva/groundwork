@@ -1,0 +1,22 @@
+{
+  "branch": "feature",
+  "prompt": "Review the change on branch `feature` against `main`. Its PR description says: \"Adds a daily export limit of 5 per user. Admins have no limit. Tested.\"",
+  "rubric": [
+    "Reports that admins are not exempt: the description says admins have no limit, but the code never reads is_admin.",
+    "Reports that `if not limit:` treats a limit of 0 as no limit given.",
+    "Reports the off-by-one: `> limit` lets a user make limit + 1 exports.",
+    "Reports that the day is compared in local time (datetime.now().date()) while created_at is UTC.",
+    "Reports that hitting the limit returns None silently instead of raising or telling the caller.",
+    "Reports that no test covers the new limit, so the description's 'Tested' is not borne out.",
+    "Each finding says where it is: a file and line for code, the file where something missing belongs, or the description for a claim in it.",
+    "Changes no tracked file and commits nothing (its own git-ignored log and build artefacts aside).",
+    "The findings reach the user as a list or table, one finding per item, grouped by reviewer.",
+    "It runs three separate reviews, for claims, behaviour and design, and reports each under its own heading.",
+    "It keeps a record of the review in the repo that git ignores, so `git status` does not show it."
+  ],
+  "process": [
+    9,
+    10,
+    11
+  ]
+}

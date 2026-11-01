@@ -1,0 +1,19 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "groundwork",
+  "owner": {
+    "name": "Zhefu Zhang",
+    "email": "a723356@gmail.com"
+  },
+  "metadata": {
+    "description": "Groundwork: from request to reviewed PR, with every claim tied to evidence.",
+    "version": "0.4.0"
+  },
+  "plugins": [
+    {
+      "name": "groundwork",
+      "description": "From request to reviewed PR: frame, plan, build against a defect-type standard, review with three parallel reviewers, ship, learn. Every claim tied to evidence, every product decision tied to its source.",
+      "source": "./"
+    }
+  ]
+}

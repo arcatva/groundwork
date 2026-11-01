@@ -1,0 +1,73 @@
+{
+  "steps": [
+    {
+      "name": "Frame",
+      "produces": "A brief: the problem, the behaviour as cases, what is out of scope, each with its source",
+      "file": "flow/frame.md",
+      "start": true
+    },
+    {
+      "name": "Plan",
+      "produces": "The PRs, in order, each with its cases, its reach and its first failing test",
+      "file": "flow/plan.md",
+      "after": ["Frame", "Build", "Review"]
+    },
+    {
+      "name": "Build",
+      "produces": "Code and tests, each rule file's gate met, the repo's checks run",
+      "file": "flow/build.md",
+      "start": true
+    },
+    {
+      "name": "Review",
+      "produces": "Findings from three reviewers, each with its evidence",
+      "file": "review.md",
+      "start": true
+    },
+    {
+      "name": "Ship",
+      "produces": "A PR description that matches the diff, and the user's go-ahead",
+      "file": "flow/ship.md",
+      "after": ["Review"]
+    },
+    {
+      "name": "Learn",
+      "produces": "Each miss and false alarm from people's review, as the smallest change to the skill",
+      "file": "flow/learn.md",
+      "start": true
+    }
+  ],
+  "reviewers": [
+    {
+      "name": "Claims",
+      "question": "Does the change do what its description, ticket, docstrings and comments say, everywhere they say it, and is every product choice it makes settled? What else must change with it? Does the PR description follow the repo's PR template, where it has one?",
+      "files": ["functional/larger-defects.md"]
+    },
+    {
+      "name": "Behaviour",
+      "question": "Does the code behave right in every case its inputs can take?",
+      "files": ["functional/check.md", "functional/logic.md", "functional/interface.md", "functional/timing.md", "functional/resource.md", "functional/support.md", "functional/tests.md"]
+    },
+    {
+      "name": "Design",
+      "question": "Does it follow the repo's rules and the repo's own way, and is it easy to read and change?",
+      "before": "the repo's agent instruction files and rules docs for each touched path, then",
+      "files": ["evolvability/textual.md", "evolvability/supported-by-language.md", "evolvability/organization.md", "evolvability/solution-approach.md"]
+    }
+  ],
+  "rules": [
+    {"file": "standard/evolvability/textual.md", "read_when": "a name, a docstring or comment, a message, a PR description"},
+    {"file": "standard/evolvability/supported-by-language.md", "read_when": "a type, a public symbol, a signature"},
+    {"file": "standard/evolvability/organization.md", "read_when": "a function, constant or type, and where it goes"},
+    {"file": "standard/evolvability/visual-representation.md", "read_when": "never: run the repo's formatter and linters"},
+    {"file": "standard/evolvability/solution-approach.md", "read_when": "a helper or mechanism, a call to existing code, a literal value"},
+    {"file": "standard/functional/resource.md", "read_when": "an object, a query, a write"},
+    {"file": "standard/functional/check.md", "read_when": "a branch, filter, lookup or default"},
+    {"file": "standard/functional/interface.md", "read_when": "a call or a signature"},
+    {"file": "standard/functional/logic.md", "read_when": "a comparison, a calculation, an expensive call"},
+    {"file": "standard/functional/larger-defects.md", "read_when": "a change that must fit the whole: the feature finished, each state of a screen, code outside the diff still right"},
+    {"file": "standard/functional/timing.md", "read_when": "a write, a job, a webhook"},
+    {"file": "standard/functional/tests.md", "read_when": "a test, or behaviour that needs one"},
+    {"file": "standard/functional/support.md", "read_when": "a migration, a setting, a dependency"}
+  ]
+}
